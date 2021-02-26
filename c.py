@@ -7,7 +7,7 @@ def get_key(my_dict, val):
 
 
 # Open both the files
-c_sol = open("c_sol.txt","a")       # solution
+c_sol = open("c_sol.txt","w")       # solution
 c     = open("c.txt","r")               # input data
 
 # reading the inupt file and storing variables
@@ -23,7 +23,7 @@ F = int(first_line.split()[4])      # F: bonus
 # by putting end,start in this order we can get all the roads leading to an intersection
 # rater the the roads moving out from the intersection with the help of graphs.
 routes_dict = {}                    # strees: [end,start]
-for i in range(1,S):
+for i in range(1,S+1):
     line = lines[i].split()
     routes_dict[line[2]] = [int(line[1]), int(line[0])]
 
