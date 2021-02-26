@@ -50,6 +50,6 @@ for i,key in enumerate(keys):
     for j in range(w3):
         x = value[j]
         g_key = get_key(routes_dict,[key,x])
-        w = f'{g_key} 1 \n'
+        w = f'{g_key} 5 \n'
         f_sol.write(w)
 
