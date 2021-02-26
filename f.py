@@ -47,10 +47,16 @@ for i in range(S):
     if key not in street_dict.keys():
         g_street[key] = 0
         del routes_dict_1[key]
-    elif street_dict[key] >= 25 and street_dict[key] < 100:
+    elif street_dict[key] >= 25 and street_dict[key] < 70:
         g_street[key] = 2
-    elif street_dict[key] >= 100:
-        g_street[key] = 2
+    elif street_dict[key] >= 70 and street_dict[key] < 170:
+        g_street[key] = 3
+    elif street_dict[key] >= 170 and street_dict[key] < 250:
+        g_street[key] = 4
+    elif street_dict[key] >= 250 and street_dict[key] < 400:
+        g_street[key] = 7
+    elif street_dict[key] >= 400:
+        g_street[key] = 15
     else:
         g_street[key] = 1
 
