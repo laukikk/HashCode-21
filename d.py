@@ -47,7 +47,7 @@ for i in range(S):
     if key not in street_dict.keys():
         g_street[key] = 0
         del routes_dict_1[key]
-    elif street_dict[key] >= 4:
+    elif street_dict[key] >= 7:
         g_street[key] = 2
     else:
         g_street[key] = 1
@@ -56,7 +56,7 @@ for i in range(S):
 # print(max(street_dict.values()))
 
 # fig = plt.hist(street_dict.values(),max(street_dict.values()))
-# plt.show()
+# plt.savefig('d.jpg')
 
 # graph now stores the graph of our data, but in the reverse order
 routes = list(routes_dict_1.values()) # stores all the routes
