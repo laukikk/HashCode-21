@@ -31,8 +31,8 @@ for i in range(1,S+1):
     routes_dict[line[2]] = [int(line[1]), int(line[0])]
     routes_len[line[2]]  = int(line[3])
 
-# create a dictionary to store occurance of each street
-street_dict = {}
+# create a dictionary to store occurence of each street
+street_dict = {}                    # street: # occurence
 for i in range(S+1,S+1+V):
     line = lines[i].split()
     n = int(line[0])                # indicates the numer of streets traversed by each car
@@ -61,24 +61,21 @@ for i in range(S):
         g_street[key] = 1
 
 # loop concerning road length
-for i in range(S):
-    key = list(routes_dict.keys())[i]
-    if key not in routes_len.keys():
-        g_street[key] += 0
-        del routes_dict_1[key]
-    elif routes_len[key] > 5 and routes_len[key] < 10:
-        g_street[key] = 2
-    elif routes_len[key] > 10 and routes_len[key] < 15:
-        g_street[key] = 4
+for i in range(len(g_street.keys())):
+    key = list(g_street.keys())[i]
+    if routes_len[key] <= 50:
+        g_street[key] += 1
     else:
-        g_street[key] = 1
+        g_street[key] += 0
 
 ###########################################################################
-print(max(street_dict.values()))
-
-fig = plt.hist(street_dict.values(),max(street_dict.values()))
+# plotting histograms
+fig = plt.hist(street_dict.values(),max(street_dict.values()))      # road occurences
 plt.savefig('b.jpg')
-# plt.show()
+plt.close()
+fig = plt.hist(routes_len.values(),max(routes_len.values()))        # street length
+plt.savefig('b1.jpg')
+
 
 # graph now stores the graph of our data, but in the reverse order
 routes = list(routes_dict_1.values()) # stores all the routes
@@ -104,7 +101,6 @@ for i,key in enumerate(keys):
         x          = value[j]
         street     = get_key(routes_dict,[key,x])
         street_num = g_street[street]
-        if street_num != 0:
-            w      = f'{street} {street_num} \n'
-            sol.write(w)
-
+        w      = f'{street} {street_num} \n'
+        sol.write(w)
+            

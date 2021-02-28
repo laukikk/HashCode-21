@@ -24,7 +24,7 @@ F = int(first_line.split()[4])      # F: bonus
 # create a dictionary to store street name : end, start .... 
 # by putting end,start in this order we can get all the roads leading to an intersection
 # rater the the roads moving out from the intersection with the help of graphs.
-routes_dict = {}                    # strees: [end,start]
+routes_dict = {}                    # street: [end,start]
 for i in range(1,S+1):
     line = lines[i].split()
     routes_dict[line[2]] = [int(line[1]), int(line[0])]
