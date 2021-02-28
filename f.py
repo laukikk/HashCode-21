@@ -52,11 +52,11 @@ for i in range(S):
     elif street_dict[key] >= 70 and street_dict[key] < 170:
         g_street[key] = 3
     elif street_dict[key] >= 170 and street_dict[key] < 250:
-        g_street[key] = 5
+        g_street[key] = 4
     elif street_dict[key] >= 250 and street_dict[key] < 360:
-        g_street[key] = 8
+        g_street[key] = 7
     elif street_dict[key] >= 360:
-        g_street[key] = 19
+        g_street[key] = 18
     else:
         g_street[key] = 1
 
