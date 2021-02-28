@@ -47,17 +47,15 @@ for i in range(S):
     if key not in street_dict.keys():
         g_street[key] = 0
         del routes_dict_1[key]
-    elif street_dict[key] >= 15:
+    elif street_dict[key] >= 14:
         g_street[key] = 2
     else:
         g_street[key] = 1
 
-
 # print(max(street_dict.values()))
 
-# fig = plt.hist(street_dict.values(),70)
-# plt.imsave('b.png',fig)
-# plt.show()
+# fig = plt.hist(street_dict.values(),max(street_dict.values()))
+# plt.savefig('c.jpg')
 
 # graph now stores the graph of our data, but in the reverse order
 routes = list(routes_dict_1.values()) # stores all the routes
