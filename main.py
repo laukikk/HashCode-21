@@ -9,11 +9,11 @@ def get_key(my_dict, val):
 
 
 # Open both the files
-b_sol = open("b_sol.txt","w")       # solution
-b     = open("b.txt","r")               # input data
+sol = open("b_sol.txt","w")       # solution
+fil = open("b.txt","r")           # input data
 
 # reading the inupt file and storing variables
-lines = b.readlines()
+lines = fil.readlines()
 first_line = lines[0]
 D = int(first_line.split()[0])      # D: duration
 I = int(first_line.split()[1])      # I: intersections
@@ -25,9 +25,11 @@ F = int(first_line.split()[4])      # F: bonus
 # by putting end,start in this order we can get all the roads leading to an intersection
 # rater the the roads moving out from the intersection with the help of graphs.
 routes_dict = {}                    # strees: [end,start]
+routes_len  = {}
 for i in range(1,S+1):
     line = lines[i].split()
     routes_dict[line[2]] = [int(line[1]), int(line[0])]
+    routes_len[line[2]]  = int(line[3])
 
 # create a dictionary to store occurance of each street
 street_dict = {}
@@ -40,6 +42,10 @@ for i in range(S+1,S+1+V):
             street_dict[street] += 1
         else:
             street_dict[street] = 1
+
+############################################################################################
+
+# loop for weighting the roads as per how mnay different cars use it
 routes_dict_1 = routes_dict.copy()
 g_street = {}
 for i in range(S):
@@ -47,15 +53,31 @@ for i in range(S):
     if key not in street_dict.keys():
         g_street[key] = 0
         del routes_dict_1[key]
-    elif street_dict[key] > 5:
+    elif street_dict[key] > 5 and street_dict[key] < 10:
         g_street[key] = 2
+    elif street_dict[key] > 10 and street_dict[key] < 15:
+        g_street[key] = 4
     else:
         g_street[key] = 1
 
+# loop concerning road length
+for i in range(S):
+    key = list(routes_dict.keys())[i]
+    if key not in routes_len.keys():
+        g_street[key] += 0
+        del routes_dict_1[key]
+    elif routes_len[key] > 5 and routes_len[key] < 10:
+        g_street[key] = 2
+    elif routes_len[key] > 10 and routes_len[key] < 15:
+        g_street[key] = 4
+    else:
+        g_street[key] = 1
 
-# print(max(street_dict.values()))
+###########################################################################
+print(max(street_dict.values()))
 
-# plt.hist(street_dict.values(),30)
+fig = plt.hist(street_dict.values(),max(street_dict.values()))
+plt.savefig('b.jpg')
 # plt.show()
 
 # graph now stores the graph of our data, but in the reverse order
@@ -68,15 +90,15 @@ g_dict = graph.graph_dict           # store all the intersections that lead to a
 keys   = list(g_dict.keys())
 values = list(g_dict.values())
 w1     = str(len(keys))
-b_sol.write(f'{w1} \n')
+sol.write(f'{w1} \n')
 
 
 for i,key in enumerate(keys):
     w2    = key
-    b_sol.write(f'{w2} \n')
+    sol.write(f'{w2} \n')
     value = values[i]
     w3    = len(value)
-    b_sol.write(f'{w3} \n')
+    sol.write(f'{w3} \n')
 
     for j in range(w3):
         x          = value[j]
@@ -84,5 +106,5 @@ for i,key in enumerate(keys):
         street_num = g_street[street]
         if street_num != 0:
             w      = f'{street} {street_num} \n'
-            b_sol.write(w)
+            sol.write(w)
 
