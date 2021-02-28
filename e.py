@@ -57,11 +57,10 @@ for i in range(S):
         g_street[key] = 1
 
 
-print(max(street_dict.values()))
+# print(max(street_dict.values()))
 
-fig = plt.hist(street_dict.values(),max(street_dict.values()))
-plt.savefig('e.jpg')
-# plt.show()
+# fig = plt.hist(street_dict.values(),max(street_dict.values()))
+# plt.savefig('d.jpg')
 
 # graph now stores the graph of our data, but in the reverse order
 routes = list(routes_dict_1.values()) # stores all the routes

@@ -52,20 +52,18 @@ for i in range(S):
     elif street_dict[key] >= 70 and street_dict[key] < 170:
         g_street[key] = 3
     elif street_dict[key] >= 170 and street_dict[key] < 250:
-        g_street[key] = 4
+        g_street[key] = 5
     elif street_dict[key] >= 250 and street_dict[key] < 360:
-        g_street[key] = 7
+        g_street[key] = 8
     elif street_dict[key] >= 360:
-        g_street[key] = 18
+        g_street[key] = 19
     else:
         g_street[key] = 1
 
+# print(max(street_dict.values()))
 
-print(max(street_dict.values()))
-
-fig = plt.hist(street_dict.values(),max(street_dict.values()))
-plt.savefig('f.jpg')
-# plt.show()
+# fig = plt.hist(street_dict.values(),max(street_dict.values()))
+# plt.savefig('f.jpg')
 
 # graph now stores the graph of our data, but in the reverse order
 routes = list(routes_dict_1.values()) # stores all the routes
