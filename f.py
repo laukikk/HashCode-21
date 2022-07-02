@@ -25,9 +25,11 @@ F = int(first_line.split()[4])      # F: bonus
 # by putting end,start in this order we can get all the roads leading to an intersection
 # rater the the roads moving out from the intersection with the help of graphs.
 routes_dict = {}                    # strees: [end,start]
+routes_len  = {}
 for i in range(1,S+1):
     line = lines[i].split()
     routes_dict[line[2]] = [int(line[1]), int(line[0])]
+    routes_len[line[2]]  = int(line[3])
 
 # create a dictionary to store occurance of each street
 street_dict = {}
@@ -40,6 +42,10 @@ for i in range(S+1,S+1+V):
             street_dict[street] += 1
         else:
             street_dict[street] = 1
+
+############################################################################################
+
+# loop for weighting the roads as per how mnay different cars use it
 routes_dict_1 = routes_dict.copy()
 g_street = {}
 for i in range(S):
@@ -52,18 +58,29 @@ for i in range(S):
     elif street_dict[key] >= 70 and street_dict[key] < 170:
         g_street[key] = 3
     elif street_dict[key] >= 170 and street_dict[key] < 250:
-        g_street[key] = 4
+        g_street[key] = 5
     elif street_dict[key] >= 250 and street_dict[key] < 360:
-        g_street[key] = 7
+        g_street[key] = 10
     elif street_dict[key] >= 360:
-        g_street[key] = 18
+        g_street[key] = 20
     else:
         g_street[key] = 1
 
-# print(max(street_dict.values()))
+# loop concerning road length
+for i in range(len(g_street.keys())):
+    key = list(g_street.keys())[i]
+    if routes_len[key] <= 9:
+        g_street[key] += 0
+    else:
+        g_street[key] += 0
 
-# fig = plt.hist(street_dict.values(),max(street_dict.values()))
-# plt.savefig('f.jpg')
+###########################################################################
+# plotting histograms
+fig = plt.hist(street_dict.values(),max(street_dict.values()))      # road occurences
+plt.savefig('f.jpg')
+plt.close()
+fig = plt.hist(routes_len.values(),max(routes_len.values()))        # street length
+plt.savefig('f1.jpg')
 
 # graph now stores the graph of our data, but in the reverse order
 routes = list(routes_dict_1.values()) # stores all the routes
